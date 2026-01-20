@@ -15,7 +15,7 @@ import { useUser } from '@/lib/hooks/useUser';
 import { formatDate, getMemberStatusColor, formatMemberStatus } from '@/lib/utils';
 
 export default function AdminMembersPage() {
-  const { user } = useUser();
+  const { user, loading: userLoading } = useUser();
   const [members, setMembers] = useState<any[]>([]);
   const [filteredMembers, setFilteredMembers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
