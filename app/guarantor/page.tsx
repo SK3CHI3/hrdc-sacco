@@ -115,55 +115,6 @@ export default function GuarantorPage() {
         .eq('id', requestId);
 
       if (updateError) throw updateError;
-
-      const { error: memberError } = await supabase
-        .from('members')
-        .update({
-          committed_balance: member.committed_balance + guaranteedAmount,
-          available_balance: member.available_balance - guaranteedAmount,
-        })
-        .eq('id', member.id);
-
-      if (memberError) throw memberError;
-
-      const { data: loan } = await supabase
-        .from('loans')
-        .select('*, members:member_id(user_id)')
-        .eq('id', loanId)
-        .single();
-
-      if (loan) {
-        await supabase.from('notifications').insert({
-          user_id: loan.members.user_id,
-          title: 'Guarantor Accepted',
-          message: `A guarantor has accepted your loan request for ${loan.loan_number}`,
-          type: 'LOAN',
-          reference_id: loanId,
-        });
-
-        const { data: allGuarantors } = await supabase
-          .from('loan_guarantors')
-          .select('*')
-          .eq('loan_id', loanId);
-
-        const acceptedCount = allGuarantors?.filter(g => g.status === 'ACCEPTED').length || 0;
-
-        if (acceptedCount >= loan.guarantors_required) {
-          await supabase
-            .from('loans')
-            .update({ status: 'SUBMITTED' })
-            .eq('id', loanId);
-
-          await supabase.from('notifications').insert({
-            user_id: loan.members.user_id,
-            title: 'Loan Ready for Review',
-            message: `All guarantors have accepted. Your loan ${loan.loan_number} is now submitted for review.`,
-            type: 'LOAN',
-            reference_id: loanId,
-          });
-        }
-      }
-
       fetchGuarantorData();
     } catch (error: any) {
       alert(error.message || 'Failed to accept guarantor request');
@@ -184,23 +135,6 @@ export default function GuarantorPage() {
         .eq('id', requestId);
 
       if (updateError) throw updateError;
-
-      const { data: loan } = await supabase
-        .from('loans')
-        .select('*, members:member_id(user_id)')
-        .eq('id', loanId)
-        .single();
-
-      if (loan) {
-        await supabase.from('notifications').insert({
-          user_id: loan.members.user_id,
-          title: 'Guarantor Declined',
-          message: `A guarantor has declined your loan request for ${loan.loan_number}. Please find another guarantor.`,
-          type: 'LOAN',
-          reference_id: loanId,
-        });
-      }
-
       fetchGuarantorData();
     } catch (error: any) {
       alert(error.message || 'Failed to reject guarantor request');

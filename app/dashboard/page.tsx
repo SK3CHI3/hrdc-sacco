@@ -426,10 +426,18 @@ export default function DashboardPage() {
                       Guarantor Requests {guarantorRequests.length > 0 && `(${guarantorRequests.length})`}
                     </Button>
                   </Link>
-                  <Button className="w-full justify-start h-14 text-base font-bold border-2" variant="outline" onClick={() => alert('Referral feature coming soon! Share your member number with friends.')}>
-                    <Users className="mr-3 h-5 w-5" />
-                    Refer a Friend
-                  </Button>
+                  <Link href="/withdrawals">
+                    <Button className="w-full justify-start h-14 text-base font-bold border-2" variant="outline">
+                      <Wallet className="mr-3 h-5 w-5" />
+                      Withdraw Funds
+                    </Button>
+                  </Link>
+                  <Link href="/referrals">
+                    <Button className="w-full justify-start h-14 text-base font-bold border-2" variant="outline">
+                      <Users className="mr-3 h-5 w-5" />
+                      Refer a Friend
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </div>

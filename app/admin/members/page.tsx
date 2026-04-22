@@ -108,42 +108,6 @@ export default function AdminMembersPage() {
         .eq('id', memberId);
 
       if (error) throw error;
-
-      const member = members.find(m => m.id === memberId);
-      if (member) {
-        await supabase.from('notifications').insert({
-          user_id: member.user_id,
-          title: 'Membership Approved',
-          message: 'Congratulations! Your membership has been approved. You can now access all SACCO services.',
-          type: 'APPROVAL',
-        });
-
-        if (member.referred_by) {
-          const { data: settings } = await supabase
-            .from('sacco_settings')
-            .select('value')
-            .eq('key', 'referral_points_per_member')
-            .single();
-
-          const points = settings?.value || 100;
-
-          await supabase.from('loyalty_points').insert({
-            member_id: member.referred_by,
-            points: points,
-            reason: 'Referral bonus',
-            reference_id: memberId,
-          });
-
-          await supabase
-            .from('referrals')
-            .update({
-              points_awarded: points,
-              points_awarded_at: new Date().toISOString(),
-            })
-            .eq('referred_member_id', memberId);
-        }
-      }
-
       fetchMembers();
     } catch (error) {
       console.error('Error approving member:', error);

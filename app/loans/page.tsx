@@ -166,9 +166,11 @@ export default function LoansPage() {
                       </p>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Button variant="outline" className="font-bold border-2">
-                        View Details <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      <Link href={`/loans/${loan.id}`}>
+                        <Button variant="outline" className="font-bold border-2 w-full">
+                          View Details <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </Link>
                       {loan.status === 'DISBURSED' && (
                         <Button className="bg-green-600 hover:bg-green-700 font-bold">
                           Make Payment
