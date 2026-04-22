@@ -19,6 +19,7 @@ import {
   Clock
 } from 'lucide-react';
 import { useUser } from '@/lib/hooks/useUser';
+import { formatDate } from '@/lib/utils';
 
 export default function ReferralsPage() {
   const { user, member } = useUser();

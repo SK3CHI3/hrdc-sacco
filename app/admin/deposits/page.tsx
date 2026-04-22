@@ -97,6 +97,8 @@ export default function AdminDepositsPage() {
   }, [searchTerm, statusFilter, deposits]);
 
   const handleAddDeposit = async () => {
+    if (!user) return;
+
     try {
       const { error } = await supabase
         .from('deposits')
