@@ -53,37 +53,37 @@ export function calculateLoanRepayment(
 
 export function getLoanStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    DRAFT: 'bg-slate-100 text-slate-700',
-    SUBMITTED: 'bg-blue-100 text-blue-700',
-    AWAITING_GUARANTOR_APPROVAL: 'bg-yellow-100 text-yellow-700',
-    UNDER_CREDIT_REVIEW: 'bg-indigo-100 text-indigo-700',
-    COMMITTEE_REVIEW: 'bg-purple-100 text-purple-700',
-    APPROVED: 'bg-green-100 text-green-700',
-    DISBURSED: 'bg-emerald-100 text-emerald-700',
-    REJECTED: 'bg-red-100 text-red-700',
-    CANCELLED: 'bg-gray-100 text-gray-700',
+    DRAFT: 'bg-muted text-muted-foreground border-border',
+    SUBMITTED: 'bg-primary/10 text-primary border-primary/20',
+    AWAITING_GUARANTOR_APPROVAL: 'bg-warning/10 text-warning border-warning/20',
+    UNDER_CREDIT_REVIEW: 'bg-blue-100 text-blue-700 border-blue-200',
+    COMMITTEE_REVIEW: 'bg-purple-100 text-purple-700 border-purple-200',
+    APPROVED: 'bg-success/10 text-success border-success/20',
+    DISBURSED: 'bg-success/20 text-success border-success/30 font-bold',
+    REJECTED: 'bg-error/10 text-error border-error/20',
+    CANCELLED: 'bg-muted text-muted-foreground border-border',
   };
-  return colors[status] || 'bg-gray-100 text-gray-700';
+  return colors[status] || 'bg-muted text-muted-foreground border-border';
 }
 
 export function getMemberStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    PENDING_APPROVAL: 'bg-yellow-100 text-yellow-700',
-    ACTIVE: 'bg-green-100 text-green-700',
-    SUSPENDED: 'bg-red-100 text-red-700',
-    INACTIVE: 'bg-gray-100 text-gray-700',
+    PENDING_APPROVAL: 'bg-warning/10 text-warning border-warning/20',
+    ACTIVE: 'bg-success/10 text-success border-success/20',
+    SUSPENDED: 'bg-error/10 text-error border-error/20',
+    INACTIVE: 'bg-muted text-muted-foreground border-border',
   };
-  return colors[status] || 'bg-gray-100 text-gray-700';
+  return colors[status] || 'bg-muted text-muted-foreground border-border';
 }
 
 export function getPaymentStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    PENDING: 'bg-yellow-100 text-yellow-700',
-    COMPLETED: 'bg-green-100 text-green-700',
-    FAILED: 'bg-red-100 text-red-700',
-    REVERSED: 'bg-orange-100 text-orange-700',
+    PENDING: 'bg-warning/10 text-warning border-warning/20',
+    COMPLETED: 'bg-success/10 text-success border-success/20',
+    FAILED: 'bg-error/10 text-error border-error/20',
+    REVERSED: 'bg-orange-100 text-orange-700 border-orange-200',
   };
-  return colors[status] || 'bg-gray-100 text-gray-700';
+  return colors[status] || 'bg-muted text-muted-foreground border-border';
 }
 
 export function formatLoanStatus(status: string): string {

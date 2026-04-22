@@ -84,20 +84,20 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 selection:bg-primary/20 selection:text-primary">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-900 rounded-lg mb-4">
-            <span className="text-white font-bold text-2xl">HS</span>
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-primary rounded-2xl mb-6 shadow-xl shadow-primary/20 -rotate-3 hover:rotate-0 transition-transform duration-300 group">
+            <span className="text-primary-foreground font-display font-black text-3xl group-hover:scale-110 transition-transform">KS</span>
           </div>
-          <h1 className="text-3xl font-bold text-slate-900">HRDC SACCO</h1>
-          <p className="text-slate-700 font-medium mt-2">Create your member account</p>
+          <h1 className="text-4xl font-display font-black text-foreground tracking-tight mb-2">KOPA SACCO</h1>
+          <p className="text-muted-foreground font-medium text-lg">Create your member account</p>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Member Registration</CardTitle>
-            <CardDescription>Join HRDC SACCO and start your savings journey</CardDescription>
+        <Card className="card-premium">
+          <CardHeader className="pb-6">
+            <CardTitle className="text-2xl font-display font-bold text-foreground">Member Registration</CardTitle>
+            <CardDescription className="text-muted-foreground font-medium">Join KOPA SACCO and start your savings journey</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleRegister} className="space-y-4">
@@ -199,13 +199,13 @@ export default function RegisterPage() {
                 />
               </div>
 
-              <Button type="submit" className="w-full" disabled={loading || !!success}>
+              <Button type="submit" className="w-full h-12 text-lg font-bold shadow-lg shadow-primary/10" disabled={loading || !!success}>
                 {loading ? 'Creating account...' : success ? 'Account Created!' : 'Create Account'}
               </Button>
 
-              <div className="text-center text-sm">
-                <span className="text-slate-700 font-medium">Already have an account? </span>
-                <Link href="/auth/login" className="text-slate-900 font-semibold hover:underline">
+              <div className="text-center pt-2">
+                <span className="text-muted-foreground font-medium">Already have an account? </span>
+                <Link href="/auth/login" className="text-primary font-bold hover:underline transition-all underline-offset-4">
                   Sign in here
                 </Link>
               </div>
@@ -213,8 +213,8 @@ export default function RegisterPage() {
           </CardContent>
         </Card>
 
-        <p className="text-center text-sm text-slate-700 font-medium mt-6">
-          By registering, you agree to our Terms of Service and Privacy Policy
+        <p className="text-center text-sm text-muted-foreground font-medium mt-8">
+          By registering, you agree to our <Link href="#" className="text-foreground hover:underline">Terms of Service</Link> and <Link href="#" className="text-foreground hover:underline">Privacy Policy</Link>
         </p>
       </div>
     </div>

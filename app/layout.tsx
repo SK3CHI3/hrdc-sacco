@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import { ElevenLabsWidget } from "@/components/ElevenLabsWidget";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "HRDC SACCO - Member Portal",
-  description: "HRDC SACCO Management System - Savings, Loans, and Member Services",
+  title: "KOPA SACCO - Premium Member Portal",
+  description: "KOPA SACCO Management System - Professional Savings, Loans, and Financial Growth",
 };
 
 export default function RootLayout({
@@ -37,16 +36,16 @@ export default function RootLayout({
                 },
                 branding: {
                   logo: 'https://t4.ftcdn.net/jpg/01/40/37/27/360_F_140372778_t5pCMkpioaa3MDXvXy17S9yq1pdGI6V2.jpg',
-                  name: 'CustomCX Agent',
-                  welcomeText: 'Hi 👋, how can we help?',
+                  name: 'Alexis Support Agent',
+                  welcomeText: 'Hi 👋, I\'m Alexis. How can I help you today?',
                   responseTimeText: 'We typically respond right away'
                 },
                 style: {
-                  primaryColor: '#854fff',
-                  secondaryColor: '#6b3fd4',
+                  primaryColor: '#0f172a',
+                  secondaryColor: '#1e293b',
                   position: 'right',
                   backgroundColor: '#ffffff',
-                  fontColor: '#333333'
+                  fontColor: '#0f172a'
                 }
               };
             `
@@ -55,11 +54,9 @@ export default function RootLayout({
         <script src="https://cdn.jsdelivr.net/gh/shadrack-ago/n8n/widget.js?v=2.6" async type="text/javascript"></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${outfit.variable} antialiased`}
       >
         {children}
-        <ElevenLabsWidget agentId="agent_6401kgq5n0n8f6885h7xh4cp96me" />
-        <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
       </body>
     </html>
   );

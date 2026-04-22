@@ -2,7 +2,7 @@
 
 ## About Kopa SACCO
 
-Kopa SACCO is a modern Savings and Credit Cooperative Society that provides digital financial services to members. Our platform enables members to save, apply for loans, and access financial services conveniently through our web and voice-enabled support system.
+Kopa SACCO is a modern Savings and Credit Cooperative Society that provides digital financial services to members. Our platform enables members to save, apply for loans, and access financial services conveniently through our web-based portal.
 
 ---
 
@@ -501,69 +501,7 @@ Kopa SACCO is a modern Savings and Credit Cooperative Society that provides digi
 
 ---
 
-## 9. VOICE SUPPORT AGENT GUIDELINES
-
-### Voice Interaction Best Practices
-
-**Greeting:**
-- "Hello! Welcome to Kopa SACCO. I'm your virtual assistant. How may I help you today?"
-
-**Verification:**
-- "For security, may I have your member number or registered phone number?"
-- Never ask for passwords or PINs
-
-**Common Voice Queries:**
-
-**Balance Inquiry:**
-- "Your current available balance is [amount] Kenya Shillings"
-- "Your total savings including shares is [amount] Kenya Shillings"
-
-**Loan Status:**
-- "Your loan application [number] is currently [status]"
-- "You have [number] active loan(s) with total balance of [amount]"
-
-**Loan Eligibility:**
-- "Based on your savings of [amount], you can borrow up to [amount] without guarantors"
-- "For loans above [amount], you'll need [number] guarantors"
-
-**Making Deposits:**
-- Provide M-Pesa paybill instructions
-- Confirm member number to use
-- Explain processing time
-
-**Guarantor Requests:**
-- "You have [number] pending guarantor request(s)"
-- Provide loan details and borrower information
-- Guide through acceptance/rejection process
-
-### Voice Commands to Recognize
-
-- "Check balance" / "What's my balance"
-- "Loan status" / "Check my loan"
-- "How to apply for loan"
-- "Deposit money" / "How to save"
-- "Guarantor request" / "Someone wants me to guarantee"
-- "Join SACCO" / "How to register"
-- "Loan eligibility" / "How much can I borrow"
-- "Contact support" / "Speak to agent"
-
-### Escalation Triggers
-
-**Transfer to Human Agent When:**
-- Customer is frustrated or angry
-- Complex dispute or complaint
-- Technical issue beyond scope
-- Request for account changes
-- Loan rejection appeal
-- Default or payment issues
-- Security concerns
-
-**Escalation Script:**
-- "I understand this requires specialized assistance. Let me connect you with one of our support agents who can help you better."
-
----
-
-## 10. FREQUENTLY ASKED QUESTIONS (FAQ)
+## 9. FREQUENTLY ASKED QUESTIONS (FAQ)
 
 ### General Questions
 
@@ -780,7 +718,7 @@ A: Use the "Forgot Password" link on the login page to reset.
 
 ## SUPPORT AGENT NOTES
 
-This knowledge base should be used as the primary reference for both chat and voice support interactions. Always:
+This knowledge base should be used as the primary reference for chat support interactions. Always:
 
 1. **Verify member identity** before providing account-specific information
 2. **Use clear, simple language** avoiding technical jargon
@@ -790,8 +728,6 @@ This knowledge base should be used as the primary reference for both chat and vo
 6. **Stay updated** on policy changes and system updates
 7. **Maintain confidentiality** of all member information
 8. **Provide accurate information** - verify before confirming
-
-For voice agents: Speak clearly, confirm understanding, and repeat important information like amounts and dates.
 
 For chat agents: Use proper formatting, provide links where helpful, and offer to escalate to phone support for complex issues.
 

@@ -24,29 +24,29 @@ export function Header() {
   const isStaff = ['SUPER_ADMIN', 'ADMIN', 'CREDIT_OFFICER', 'COMMITTEE_MEMBER', 'AUDITOR'].includes(user.role);
 
   return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <header className="bg-white border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/dashboard" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-slate-800 rounded-md flex items-center justify-center">
-                <span className="text-white font-bold text-sm">HS</span>
+            <Link href="/dashboard" className="flex items-center space-x-3 group">
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+                <span className="text-white font-black text-base">KS</span>
               </div>
-              <span className="font-semibold text-lg text-slate-900">HRDC SACCO</span>
+              <span className="font-display font-black text-2xl text-foreground tracking-tighter">KOPA SACCO</span>
             </Link>
           </div>
 
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/dashboard" className="text-slate-900 hover:text-slate-700 font-bold text-base">
+            <Link href="/dashboard" className="text-foreground hover:text-primary font-bold text-base">
               Dashboard
             </Link>
             
             {user.role === 'MEMBER' && member?.status === 'ACTIVE' && (
               <>
-                <Link href="/loans/apply" className="text-slate-900 hover:text-slate-700 font-bold text-base">
+                <Link href="/loans/apply" className="text-foreground hover:text-primary font-bold text-base">
                   My Loans
                 </Link>
-                <Link href="/guarantor" className="text-slate-900 hover:text-slate-700 font-bold text-base">
+                <Link href="/guarantor" className="text-foreground hover:text-primary font-bold text-base">
                   Guarantor
                 </Link>
               </>
@@ -54,10 +54,10 @@ export function Header() {
 
             {isStaff && (
               <>
-                <Link href="/admin/members" className="text-slate-900 hover:text-slate-700 font-bold text-base">
+                <Link href="/admin/members" className="text-foreground hover:text-primary font-bold text-base">
                   Members
                 </Link>
-                <Link href="/admin/loans" className="text-slate-900 hover:text-slate-700 font-bold text-base">
+                <Link href="/admin/loans" className="text-foreground hover:text-primary font-bold text-base">
                   Loans
                 </Link>
               </>
@@ -66,18 +66,18 @@ export function Header() {
 
           <div className="hidden md:flex items-center space-x-4">
             <Link href="/notifications">
-              <Button variant="outline" size="icon" className="relative border-2 border-slate-900 hover:bg-slate-900 hover:text-white">
-                <Bell className="h-6 w-6 text-slate-900" />
+              <Button variant="outline" size="icon" className="relative border-2 border-primary hover:bg-primary hover:text-white">
+                <Bell className="h-6 w-6 text-primary" />
               </Button>
             </Link>
 
-            <div className="flex items-center space-x-3 border-l border-slate-300 pl-4">
+            <div className="flex items-center space-x-3 border-l border-border pl-4">
               <div className="text-right">
-                <p className="text-sm font-bold text-slate-900">{user.full_name}</p>
-                <p className="text-xs font-bold text-slate-700">{user.role.replace('_', ' ')}</p>
+                <p className="text-sm font-bold text-foreground">{user.full_name}</p>
+                <p className="text-xs font-bold text-muted-foreground">{user.role.replace('_', ' ')}</p>
               </div>
-              <Button variant="outline" size="icon" onClick={handleSignOut} className="border-2 border-red-600 hover:bg-red-600 hover:text-white">
-                <LogOut className="h-6 w-6 text-red-600" />
+              <Button variant="outline" size="icon" onClick={handleSignOut} className="border-2 border-error hover:bg-error hover:text-white">
+                <LogOut className="h-6 w-6 text-error" />
               </Button>
             </div>
           </div>
@@ -107,7 +107,7 @@ export function Header() {
 
             <Link
               href="/dashboard"
-              className="block py-3 text-slate-900 hover:bg-slate-100 font-bold text-base"
+              className="block py-3 text-foreground hover:bg-slate-100 font-bold text-base"
               onClick={() => setMobileMenuOpen(false)}
             >
               Dashboard
@@ -117,14 +117,14 @@ export function Header() {
               <>
                 <Link
                   href="/loans/apply"
-                  className="block py-3 text-slate-900 hover:bg-slate-100 font-bold text-base"
+                  className="block py-3 text-foreground hover:bg-slate-100 font-bold text-base"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   My Loans
                 </Link>
                 <Link
                   href="/guarantor"
-                  className="block py-3 text-slate-900 hover:bg-slate-100 font-bold text-base"
+                  className="block py-3 text-foreground hover:bg-slate-100 font-bold text-base"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Guarantor
@@ -136,14 +136,14 @@ export function Header() {
               <>
                 <Link
                   href="/admin/members"
-                  className="block py-3 text-slate-900 hover:bg-slate-100 font-bold text-base"
+                  className="block py-3 text-foreground hover:bg-slate-100 font-bold text-base"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Members
                 </Link>
                 <Link
                   href="/admin/loans"
-                  className="block py-3 text-slate-900 hover:bg-slate-100 font-bold text-base"
+                  className="block py-3 text-foreground hover:bg-slate-100 font-bold text-base"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Loans
@@ -153,7 +153,7 @@ export function Header() {
 
             <Link
               href="/notifications"
-              className="block py-3 text-slate-900 hover:bg-slate-100 font-bold text-base"
+              className="block py-3 text-foreground hover:bg-slate-100 font-bold text-base"
               onClick={() => setMobileMenuOpen(false)}
             >
               Notifications
