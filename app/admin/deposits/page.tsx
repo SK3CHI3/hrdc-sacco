@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Search, Plus, Wallet, TrendingUp, CheckCircle, Clock, Filter } from 'lucide-react';
+import { Search, Plus, Wallet, TrendingUp, CheckCircle, XCircle, Clock, Filter } from 'lucide-react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { useUser } from '@/lib/hooks/useUser';
 
@@ -22,6 +22,7 @@ export default function AdminDepositsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [showAddForm, setShowAddForm] = useState(false);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     member_id: '',
     amount: '',
@@ -142,6 +143,47 @@ export default function AdminDepositsPage() {
     }
   };
 
+  const handleUpdateTransactionStatus = async (id: string, newStatus: string) => {
+    setActionLoading(id);
+    try {
+      const { error } = await supabase
+        .from('deposits')
+        .update({ payment_status: newStatus })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      // Log the action
+      await supabase.from('audit_logs').insert({
+        user_id: user!.id,
+        action: `Transaction ${newStatus}`,
+        entity_type: 'DEPOSIT',
+        entity_id: id,
+        details: { status: newStatus }
+      });
+
+      // Refresh deposits
+      const { data } = await supabase
+        .from('deposits')
+        .select(`
+          *,
+          members:member_id (
+            member_number,
+            profiles:user_id (full_name, email)
+          )
+        `)
+        .order('created_at', { ascending: false })
+        .limit(100);
+
+      setDeposits(data || []);
+      setFilteredDeposits(data || []);
+    } catch (error) {
+      console.error('Error updating transaction:', error);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
   if (userLoading || loading) {
     return (
       <div className="min-h-screen bg-slate-50">
@@ -216,34 +258,34 @@ export default function AdminDepositsPage() {
           <Card className="border-2 border-slate-200">
             <CardContent className="p-4 text-center">
               <p className="text-3xl font-bold text-slate-900">{statusCounts.total}</p>
-              <p className="text-sm font-bold text-slate-700">Total Deposits</p>
+              <p className="text-sm font-bold text-slate-500">Total Deposits</p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-green-200 bg-green-50">
+          <Card className="border border-slate-200 shadow-sm">
             <CardContent className="p-4 text-center">
-              <p className="text-3xl font-bold text-green-900">{statusCounts.completed}</p>
-              <p className="text-sm font-bold text-green-700">Completed</p>
+              <p className="text-3xl font-bold text-slate-900">{statusCounts.completed}</p>
+              <p className="text-sm font-bold text-slate-500">Completed</p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-amber-200 bg-amber-50">
+          <Card className="border border-slate-200 shadow-sm">
             <CardContent className="p-4 text-center">
-              <p className="text-3xl font-bold text-amber-900">{statusCounts.pending}</p>
-              <p className="text-sm font-bold text-amber-700">Pending</p>
+              <p className="text-3xl font-bold text-slate-900">{statusCounts.pending}</p>
+              <p className="text-sm font-bold text-slate-500">Pending</p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-blue-200 bg-blue-50">
+          <Card className="border border-slate-200 shadow-sm">
             <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-blue-900">{formatCurrency(totalAmount)}</p>
-              <p className="text-sm font-bold text-blue-700">Total Value</p>
+              <p className="text-2xl font-bold text-slate-900">{formatCurrency(totalAmount)}</p>
+              <p className="text-sm font-bold text-slate-500">Total Value</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Add Deposit Form */}
         {showAddForm && (
-          <Card className="mb-6 border-2 border-blue-200 bg-blue-50">
+          <Card className="mb-6 border border-slate-200 shadow-sm bg-white">
             <CardHeader>
-              <CardTitle className="text-xl font-bold text-blue-900">Record New Deposit</CardTitle>
+              <CardTitle className="text-xl font-bold text-slate-900">Record New Deposit</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -292,7 +334,7 @@ export default function AdminDepositsPage() {
               <div className="flex gap-3">
                 <Button 
                   onClick={handleAddDeposit}
-                  className="bg-green-600 hover:bg-green-700 font-bold"
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold"
                 >
                   <CheckCircle className="mr-2 h-4 w-4" />
                   Record Deposit
@@ -399,6 +441,28 @@ export default function AdminDepositsPage() {
                         </p>
                       )}
                     </div>
+                    
+                    {deposit.payment_status === 'PENDING' && (
+                      <div className="flex lg:flex-col gap-2 mt-4 lg:mt-0 lg:ml-4 lg:border-l lg:pl-4 border-slate-200">
+                        <Button
+                          onClick={() => handleUpdateTransactionStatus(deposit.id, 'COMPLETED')}
+                          disabled={actionLoading === deposit.id}
+                          className="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold"
+                        >
+                          <CheckCircle className="mr-2 h-4 w-4" />
+                          Approve
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => handleUpdateTransactionStatus(deposit.id, 'FAILED')}
+                          disabled={actionLoading === deposit.id}
+                          className="flex-1 border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold"
+                        >
+                          <XCircle className="mr-2 h-4 w-4" />
+                          Reject
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>

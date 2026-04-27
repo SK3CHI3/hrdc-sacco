@@ -150,31 +150,31 @@ export default function AdminLoansPage() {
           <Card className="border-2 border-slate-200">
             <CardContent className="p-4 text-center">
               <p className="text-3xl font-bold text-slate-900">{statusCounts.total}</p>
-              <p className="text-sm font-bold text-slate-700">Total Loans</p>
+              <p className="text-sm font-bold text-slate-500">Total Loans</p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-amber-200 bg-amber-50">
+          <Card className="border border-slate-200 shadow-sm">
             <CardContent className="p-4 text-center">
-              <p className="text-3xl font-bold text-amber-900">{statusCounts.pending}</p>
-              <p className="text-sm font-bold text-amber-700">Pending</p>
+              <p className="text-3xl font-bold text-slate-900">{statusCounts.pending}</p>
+              <p className="text-sm font-bold text-slate-500">Pending</p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-blue-200 bg-blue-50">
+          <Card className="border border-slate-200 shadow-sm">
             <CardContent className="p-4 text-center">
-              <p className="text-3xl font-bold text-blue-900">{statusCounts.approved}</p>
-              <p className="text-sm font-bold text-blue-700">Approved</p>
+              <p className="text-3xl font-bold text-slate-900">{statusCounts.approved}</p>
+              <p className="text-sm font-bold text-slate-500">Approved</p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-green-200 bg-green-50">
+          <Card className="border border-slate-200 shadow-sm">
             <CardContent className="p-4 text-center">
-              <p className="text-3xl font-bold text-green-900">{statusCounts.disbursed}</p>
-              <p className="text-sm font-bold text-green-700">Disbursed</p>
+              <p className="text-3xl font-bold text-slate-900">{statusCounts.disbursed}</p>
+              <p className="text-sm font-bold text-slate-500">Disbursed</p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-red-200 bg-red-50">
+          <Card className="border border-slate-200 shadow-sm">
             <CardContent className="p-4 text-center">
-              <p className="text-3xl font-bold text-red-900">{statusCounts.rejected}</p>
-              <p className="text-sm font-bold text-red-700">Rejected</p>
+              <p className="text-3xl font-bold text-slate-900">{statusCounts.rejected}</p>
+              <p className="text-sm font-bold text-slate-500">Rejected</p>
             </CardContent>
           </Card>
         </div>
@@ -270,15 +270,19 @@ export default function AdminLoansPage() {
                       </p>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Button variant="outline" className="font-bold border-2">
-                        <Eye className="mr-2 h-4 w-4" />
-                        View Details
-                      </Button>
-                      {loan.status === 'SUBMITTED' && (
-                        <Button className="bg-blue-600 hover:bg-blue-700 font-bold">
-                          <CheckCircle className="mr-2 h-4 w-4" />
-                          Review
+                      <Link href={`/admin/loans/${loan.id}`} className="w-full">
+                        <Button variant="outline" className="w-full font-bold border-2">
+                          <Eye className="mr-2 h-4 w-4" />
+                          View Details
                         </Button>
+                      </Link>
+                      {loan.status === 'SUBMITTED' && (
+                        <Link href={`/admin/loans/${loan.id}`} className="w-full">
+                          <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold">
+                            <CheckCircle className="mr-2 h-4 w-4" />
+                            Review
+                          </Button>
+                        </Link>
                       )}
                     </div>
                   </div>

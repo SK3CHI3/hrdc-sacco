@@ -56,20 +56,37 @@ export default function AdminMembersPage() {
   const fetchMembers = async () => {
     try {
       const { data, error } = await supabase
-        .from('members')
+        .from('profiles')
         .select(`
           *,
-          profiles:user_id (
-            full_name,
-            email,
-            phone_number
+          members!user_id (
+            id,
+            member_number,
+            national_id,
+            status,
+            created_at
           )
         `)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setMembers(data || []);
-      setFilteredMembers(data || []);
+      
+      // Transform data to match the expected format
+      const transformedData = (data || []).map(profile => {
+        const member = Array.isArray(profile.members) ? profile.members[0] : profile.members;
+        return {
+          ...member,
+          id: member?.id || profile.id, // Use member ID if exists, else profile ID
+          user_id: profile.id,
+          profiles: profile,
+          status: member?.status || 'NOT_ONBOARDED',
+          member_number: member?.member_number || 'N/A',
+          created_at: member?.created_at || profile.created_at
+        };
+      });
+
+      setMembers(transformedData);
+      setFilteredMembers(transformedData);
     } catch (error) {
       console.error('Error fetching members:', error);
     } finally {
@@ -227,6 +244,7 @@ export default function AdminMembersPage() {
                   <option value="ACTIVE">Active</option>
                   <option value="SUSPENDED">Suspended</option>
                   <option value="INACTIVE">Inactive</option>
+                  <option value="NOT_ONBOARDED">Not Onboarded</option>
                 </select>
               </div>
             </div>
@@ -262,8 +280,8 @@ export default function AdminMembersPage() {
                           {member.profiles?.email}
                         </td>
                         <td className="py-3 px-4">
-                          <Badge className={getMemberStatusColor(member.status)}>
-                            {formatMemberStatus(member.status)}
+                          <Badge className={member.status === 'NOT_ONBOARDED' ? 'bg-slate-200 text-slate-700' : getMemberStatusColor(member.status)}>
+                            {member.status === 'NOT_ONBOARDED' ? 'Not Onboarded' : formatMemberStatus(member.status)}
                           </Badge>
                         </td>
                         <td className="py-3 px-4 text-sm text-slate-600">

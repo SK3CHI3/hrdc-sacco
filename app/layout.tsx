@@ -36,9 +36,9 @@ export default function RootLayout({
                 },
                 branding: {
                   logo: 'https://t4.ftcdn.net/jpg/01/40/37/27/360_F_140372778_t5pCMkpioaa3MDXvXy17S9yq1pdGI6V2.jpg',
-                  name: 'Alexis Support Agent',
-                  welcomeText: 'Hi 👋, I\'m Alexis. How can I help you today?',
-                  responseTimeText: 'We typically respond right away'
+                  name: "Alexis Support Agent",
+                  welcomeText: "Hi 👋, I'm Alexis. How can I help you today?",
+                  responseTimeText: "We typically respond right away"
                 },
                 style: {
                   primaryColor: '#0f172a',
