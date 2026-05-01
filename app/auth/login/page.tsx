@@ -183,6 +183,23 @@ export default function LoginPage() {
               </div>
               <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-border shadow-sm hover:border-primary/30 transition-all group">
                 <div>
+                  <p className="font-bold text-foreground group-hover:text-primary transition-colors">Internal Auditor</p>
+                  <p className="text-xs text-muted-foreground font-medium">auditor@hrdcsacco.co.ke</p>
+                </div>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="h-9 px-4 font-bold border-2 border-primary/20 text-primary hover:bg-primary hover:text-white"
+                  onClick={() => {
+                    setEmail('auditor@hrdcsacco.co.ke');
+                    setPassword('password123');
+                  }}
+                >
+                  Fill
+                </Button>
+              </div>
+              <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-border shadow-sm hover:border-primary/30 transition-all group">
+                <div>
                   <p className="font-bold text-foreground group-hover:text-primary transition-colors">Active Member</p>
                   <p className="text-xs text-muted-foreground font-medium">member.active@hrdcsacco.co.ke</p>
                 </div>
