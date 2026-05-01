@@ -82,3 +82,22 @@ h1, h2, h3, h4, h5, h6 {
   @apply bg-white border border-border shadow-[0_2px_10px_-3px_rgba(0,0,0,0.07)] rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)] hover:border-primary/10;
 }
 
+/* AI Chat Widget Fix - Prevent outer container scrolling */
+.n8n-chat-widget {
+  overflow: hidden !important;
+}
+
+.n8n-chat-widget-window {
+  overflow: hidden !important;
+  max-height: 85vh !important;
+}
+
+/* Allow only the chat messages area to scroll */
+.n8n-chat-widget-messages-list, 
+.n8n-chat-widget-messages,
+[class*="chat-widget-messages"] {
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+
